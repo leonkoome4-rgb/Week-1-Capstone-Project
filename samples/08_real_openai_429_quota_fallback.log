@@ -1,0 +1,23 @@
+11:04:03 INFO    Cloud: gpt-4o-mini @ https://api.openai.com/v1 (key loaded) | Local: llama3.2 @ http://localhost:11434
+11:04:03 INFO    [cloud] calling gpt-4o-mini (timeout 4.0s, JSON mode)
+11:04:04 WARNING [cloud] FAILED after 1.40s -> HTTPStatusError: HTTP 429 rate limited / quota exceeded
+11:04:04 WARNING [fallback] re-routing to local Ollama engine (llama3.2)
+11:04:04 INFO    [local] calling llama3.2 via Ollama (attempt 1/2)
+11:04:12 INFO    [local] OK in 7.88s
+==============================================================================
+Patient message : My father is 58 and he has crushing chest pain spreading to his left arm. He is sweating a lot and says he feels like he might faint.
+Prompt version  : v3
+------------------------------------------------------------------------------
+Parsed triage dictionary (json.loads -> dict):
+{'is_critical_emergency': True,
+ 'detected_symptoms': ['chest pain', 'sweating', 'possible fainting'],
+ 'clinical_reasoning_summary': 'Step 1: Chest pain spreading to arm, '
+                               'sweating, and possible fainting in an adult. '
+                               'Step 2: Chest pain with sweating and '
+                               'possible fainting matches the chest pain red '
+                               'flag. Step 3: Red flag present, so emergency '
+                               'routing.',
+ 'routing_destination': 'EMERGENCY_SERVICES'}
+------------------------------------------------------------------------------
+ROUTING DECISION: [CRITICAL EMERGENCY] -> EMERGENCY_SERVICES | engine=local:llama3.2 (fallback after cloud HTTPStatusError) | model latency 7.88s | total 9.29s
+==============================================================================

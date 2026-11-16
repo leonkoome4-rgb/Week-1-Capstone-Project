@@ -18,7 +18,7 @@ It tries the **cloud** first (GPT-4o-mini, native JSON mode, hard 4.0 s cap). On
 | Application | [`app.py`](app.py) |
 | Prompt log, guardrail rationale, latency table | this README |
 | 5-minute presentation (slides + script) | [`PRESENTATION.md`](PRESENTATION.md) |
-| Sample runs (7 logs, 4 of them cloud-failure fallbacks) | [`samples/`](samples/) |
+| Sample runs (8 logs, 5 of them cloud-failure fallbacks) | [`samples/`](samples/) |
 | Raw benchmark output | [`benchmarks/`](benchmarks/) |
 
 ---
@@ -146,9 +146,9 @@ Measured with `python app.py --benchmark --runs 3` (7 test cases × 3 runs per e
 | Engine | Model | Calls | Valid JSON + schema (single attempt) | Mean latency | Median | p95 | Cold start | Critical-flag accuracy |
 |---|---|---|---|---|---|---|---|---|
 | Local (edge) | llama3.2 3B via Ollama | 21 | 86% (18/21) | **8.05 s** | 7.60 s | 9.60 s | 19.60 s | 100% of valid outputs |
-| Cloud | gpt-4o-mini | 21 | *pending: no `OPENAI_API_KEY` on the benchmark machine* | — | — | — | n/a (no model load) | — |
+| Cloud | gpt-4o-mini | 21 | *pending: account returned HTTP 429 `insufficient_quota`* | — | — | — | n/a (no model load) | — |
 
-> **Cloud row:** this benchmark ran without an OpenAI key, so all 21 cloud calls failed fast with `MissingCredentials` and fell back as designed. To fill the row, add your key to `.env` and run `python app.py --benchmark --runs 3 --save benchmarks/latency_benchmark.md`.
+> **Cloud row:** the benchmark first ran without a key (`MissingCredentials`). With a key added, OpenAI returned HTTP 429 `insufficient_quota` because the account has no credit (captured in sample 08). In both cases the fallback worked as designed. To fill the row, add credit and run `python app.py --benchmark --runs 3 --save benchmarks/latency_benchmark.md`.
 
 The 3 local single-attempt failures are all the adversarial prompt-injection case (empty summary → `SchemaError`). In the real pipeline the corrective retry recovers them (see sample 03), so end-to-end valid output is 100%.
 
@@ -160,6 +160,7 @@ The 3 local single-attempt failures are all the adversarial prompt-injection cas
 | HTTP 401 invalid key | 0.68 s | 7.45 s | 8.13 s |
 | Connection refused | 0.02 s | 8.09 s (incl. corrective retry) | 11.85 s |
 | No API key configured | 0.00 s | 9.13 s | 9.13 s |
+| Real HTTP 429 (account out of credit) | 1.40 s | 7.88 s | 9.29 s |
 | Both engines down | 0.00 s / 0.03 s | n/a (fail-safe) | 0.03 s |
 
 ### Interpretation
@@ -179,6 +180,7 @@ The 3 local single-attempt failures are all the adversarial prompt-injection cas
 | [`04_swahili_http_401_fallback.log`](samples/04_swahili_http_401_fallback.log) | Real HTTP 401 from OpenAI → local; Swahili input | CRITICAL → EMERGENCY_SERVICES |
 | [`05_routine_pregnancy_local.log`](samples/05_routine_pregnancy_local.log) | Routine antenatal question | NON-CRITICAL → MATERNAL_HEALTH_TEAM |
 | [`06_both_engines_down_fail_safe.log`](samples/06_both_engines_down_fail_safe.log) | Cloud and Ollama both unreachable | Rule-based fail-safe → EMERGENCY_SERVICES |
+| [`08_real_openai_429_quota_fallback.log`](samples/08_real_openai_429_quota_fallback.log) | **Real production failure:** valid key, OpenAI account out of credit → HTTP 429 → local fallback | CRITICAL → EMERGENCY_SERVICES |
 | [`07_full_demo_local.log`](samples/07_full_demo_local.log) | All 7 built-in scenarios | 7/7 correct critical flag, 0 safety-net overrides needed |
 
 Example (sample 02):
