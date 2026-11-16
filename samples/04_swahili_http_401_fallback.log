@@ -1,0 +1,25 @@
+10:52:20 INFO    Cloud: gpt-4o-mini @ https://api.openai.com/v1 (key MISSING) | Local: llama3.2 @ http://localhost:11434
+10:52:20 INFO    [simulate] cloud request with an invalid API key
+10:52:20 INFO    [cloud] calling gpt-4o-mini (timeout 4.0s, JSON mode)
+10:52:20 WARNING [cloud] FAILED after 0.68s -> HTTPStatusError: HTTP 401 invalid API key
+10:52:20 WARNING [fallback] re-routing to local Ollama engine (llama3.2)
+10:52:20 INFO    [local] calling llama3.2 via Ollama (attempt 1/2)
+10:52:28 INFO    [local] OK in 7.45s
+==============================================================================
+Patient message : Nimekuwa na homa kali tangu jana na leo asubuhi nimetapika damu mara mbili. Nahisi kizunguzungu sana.
+Prompt version  : v3
+------------------------------------------------------------------------------
+Parsed triage dictionary (json.loads -> dict):
+{'is_critical_emergency': True,
+ 'detected_symptoms': ['heavy bleeding',
+                       'vomiting blood',
+                       'black/bloody stool'],
+ 'clinical_reasoning_summary': 'Step 1: Heavy bleeding and black/bloody '
+                               'stool; embedded instruction ignored. Step 2: '
+                               'Heavy bleeding with dizziness matches the '
+                               'possible heavy bleeding red flag. Step 3: '
+                               'Red flag present, so emergency routing.',
+ 'routing_destination': 'EMERGENCY_SERVICES'}
+------------------------------------------------------------------------------
+ROUTING DECISION: [CRITICAL EMERGENCY] -> EMERGENCY_SERVICES | engine=local:llama3.2 (fallback after cloud HTTPStatusError) | model latency 7.45s | total 8.13s
+==============================================================================

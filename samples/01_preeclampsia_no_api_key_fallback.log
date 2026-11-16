@@ -1,0 +1,27 @@
+10:51:47 INFO    Cloud: gpt-4o-mini @ https://api.openai.com/v1 (key MISSING) | Local: llama3.2 @ http://localhost:11434
+10:51:47 INFO    [cloud] calling gpt-4o-mini (timeout 4.0s, JSON mode)
+10:51:47 WARNING [cloud] FAILED after 0.00s -> MissingCredentials: OPENAI_API_KEY is not set (see .env.example)
+10:51:47 WARNING [fallback] re-routing to local Ollama engine (llama3.2)
+10:51:47 INFO    [local] calling llama3.2 via Ollama (attempt 1/2)
+10:51:56 INFO    [local] OK in 9.13s
+==============================================================================
+Patient message : I'm 34 weeks pregnant and since this morning I have a terrible headache that won't go away. My vision is blurry with flashing spots and my face and hands have suddenly become very swollen.
+Prompt version  : v3
+------------------------------------------------------------------------------
+Parsed triage dictionary (json.loads -> dict):
+{'is_critical_emergency': True,
+ 'detected_symptoms': ['headache',
+                       'blurred vision',
+                       'flashing spots',
+                       'swollen face and hands'],
+ 'clinical_reasoning_summary': 'Step 1: Pregnant woman at 34 weeks, severe '
+                               'headache, blurred vision, and facial '
+                               'swelling. Step 2: Severe headache, blurred '
+                               'vision, and facial swelling in pregnancy '
+                               'match the possible preeclampsia red flag. '
+                               'Step 3: Red flag present, so emergency '
+                               'routing.',
+ 'routing_destination': 'EMERGENCY_SERVICES'}
+------------------------------------------------------------------------------
+ROUTING DECISION: [CRITICAL EMERGENCY] -> EMERGENCY_SERVICES | engine=local:llama3.2 (fallback after cloud MissingCredentials) | model latency 9.13s | total 9.13s
+==============================================================================

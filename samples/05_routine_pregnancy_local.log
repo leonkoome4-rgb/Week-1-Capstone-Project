@@ -1,0 +1,20 @@
+10:52:28 INFO    Cloud: gpt-4o-mini @ https://api.openai.com/v1 (key MISSING) | Local: llama3.2 @ http://localhost:11434
+10:52:28 INFO    [local] calling llama3.2 via Ollama (attempt 1/2)
+10:52:36 INFO    [local] OK in 7.56s
+==============================================================================
+Patient message : I'm 20 weeks pregnant and feeling a bit more tired than usual. Is that normal? Otherwise I feel fine.
+Prompt version  : v3
+------------------------------------------------------------------------------
+Parsed triage dictionary (json.loads -> dict):
+{'is_critical_emergency': False,
+ 'detected_symptoms': ['feeling tired', '20 weeks pregnant'],
+ 'clinical_reasoning_summary': 'Step 1: Pregnant woman at 20 weeks reports '
+                               'feeling tired. Step 2: No red flags present, '
+                               'but fatigue is a common symptom of '
+                               'pregnancy. Step 3: Mild, non-urgent '
+                               'pregnancy concern suits a maternal health '
+                               'team consultation.',
+ 'routing_destination': 'MATERNAL_HEALTH_TEAM'}
+------------------------------------------------------------------------------
+ROUTING DECISION: [NON-CRITICAL] -> MATERNAL_HEALTH_TEAM | engine=local:llama3.2 | model latency 7.56s | total 7.56s
+==============================================================================

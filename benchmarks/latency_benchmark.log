@@ -1,0 +1,55 @@
+10:57:53 INFO    Cloud: gpt-4o-mini @ https://api.openai.com/v1 (key MISSING) | Local: llama3.2 @ http://localhost:11434
+10:57:53 INFO      cloud/preeclampsia: FAILED MissingCredentials
+10:57:53 INFO      cloud/preeclampsia: FAILED MissingCredentials
+10:57:53 INFO      cloud/preeclampsia: FAILED MissingCredentials
+10:57:53 INFO      cloud/routine_headache: FAILED MissingCredentials
+10:57:53 INFO      cloud/routine_headache: FAILED MissingCredentials
+10:57:53 INFO      cloud/routine_headache: FAILED MissingCredentials
+10:57:53 INFO      cloud/chest_pain: FAILED MissingCredentials
+10:57:53 INFO      cloud/chest_pain: FAILED MissingCredentials
+10:57:53 INFO      cloud/chest_pain: FAILED MissingCredentials
+10:57:53 INFO      cloud/child_cold: FAILED MissingCredentials
+10:57:53 INFO      cloud/child_cold: FAILED MissingCredentials
+10:57:53 INFO      cloud/child_cold: FAILED MissingCredentials
+10:57:53 INFO      cloud/prompt_injection: FAILED MissingCredentials
+10:57:53 INFO      cloud/prompt_injection: FAILED MissingCredentials
+10:57:53 INFO      cloud/prompt_injection: FAILED MissingCredentials
+10:57:53 INFO      cloud/swahili_vomiting_blood: FAILED MissingCredentials
+10:57:53 INFO      cloud/swahili_vomiting_blood: FAILED MissingCredentials
+10:57:53 INFO      cloud/swahili_vomiting_blood: FAILED MissingCredentials
+10:57:53 INFO      cloud/pregnancy_routine: FAILED MissingCredentials
+10:57:53 INFO      cloud/pregnancy_routine: FAILED MissingCredentials
+10:57:53 INFO      cloud/pregnancy_routine: FAILED MissingCredentials
+10:58:22 INFO      local/preeclampsia: 9.32s critical=True
+10:58:35 INFO      local/preeclampsia: 12.73s critical=True
+10:58:43 INFO      local/preeclampsia: 8.72s critical=True
+10:58:50 INFO      local/routine_headache: 6.90s critical=False
+10:58:56 INFO      local/routine_headache: 6.25s critical=False
+10:59:03 INFO      local/routine_headache: 6.18s critical=False
+10:59:11 INFO      local/chest_pain: 8.26s critical=True
+10:59:19 INFO      local/chest_pain: 7.71s critical=True
+10:59:26 INFO      local/chest_pain: 7.50s critical=True
+10:59:36 INFO      local/child_cold: 9.60s critical=False
+10:59:45 INFO      local/child_cold: 9.09s critical=False
+10:59:54 INFO      local/child_cold: 8.96s critical=False
+10:59:57 INFO      local/prompt_injection: FAILED SchemaError
+11:00:00 INFO      local/prompt_injection: FAILED SchemaError
+11:00:04 INFO      local/prompt_injection: FAILED SchemaError
+11:00:11 INFO      local/swahili_vomiting_blood: 7.74s critical=True
+11:00:19 INFO      local/swahili_vomiting_blood: 7.22s critical=True
+11:00:26 INFO      local/swahili_vomiting_blood: 7.17s critical=True
+11:00:33 INFO      local/pregnancy_routine: 7.50s critical=False
+11:00:40 INFO      local/pregnancy_routine: 7.04s critical=False
+11:00:47 INFO      local/pregnancy_routine: 7.01s critical=False
+
+Prompt v3, 7 test cases x 3 run(s) per engine. Engines called directly (no fallback, no safety net).
+
+| Engine | Model | Calls | Valid JSON+schema | Mean latency | Median | p95 | Cold start | Critical-flag accuracy |
+|---|---|---|---|---|---|---|---|---|
+| cloud | gpt-4o-mini | 21 | 0% | n/a | n/a | n/a | n/a | n/a |
+| local | llama3.2 | 21 | 86% | 8.05s | 7.60s | 9.60s | 19.60s | 100% |
+
+- cloud failure example: MissingCredentials: OPENAI_API_KEY is not set (see .env.example)
+- local failure example: SchemaError: clinical_reasoning_summary must be a non-empty string
+
+11:00:47 INFO    Saved report to benchmarks/latency_benchmark.md

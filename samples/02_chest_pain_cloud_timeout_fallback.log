@@ -1,0 +1,24 @@
+10:51:56 INFO    Cloud: gpt-4o-mini @ https://api.openai.com/v1 (key loaded) | Local: llama3.2 @ http://localhost:11434
+10:51:56 INFO    [simulate] cloud endpoint -> unresponsive server on 127.0.0.1:52618
+10:51:56 INFO    [cloud] calling gpt-4o-mini (timeout 4.0s, JSON mode)
+10:52:00 WARNING [cloud] FAILED after 4.00s -> TimeoutException: no complete response within 4.0s (TimeoutError)
+10:52:00 WARNING [fallback] re-routing to local Ollama engine (llama3.2)
+10:52:00 INFO    [local] calling llama3.2 via Ollama (attempt 1/2)
+10:52:07 INFO    [local] OK in 7.27s
+==============================================================================
+Patient message : My father is 58 and he has crushing chest pain spreading to his left arm. He is sweating a lot and says he feels like he might faint.
+Prompt version  : v3
+------------------------------------------------------------------------------
+Parsed triage dictionary (json.loads -> dict):
+{'is_critical_emergency': True,
+ 'detected_symptoms': ['chest pain', 'sweating', 'possible fainting'],
+ 'clinical_reasoning_summary': 'Step 1: Chest pain spreading to arm, '
+                               'sweating, and possible fainting in an adult. '
+                               'Step 2: Chest pain with sweating and '
+                               'possible fainting matches the chest pain red '
+                               'flag. Step 3: Red flag present, so emergency '
+                               'routing.',
+ 'routing_destination': 'EMERGENCY_SERVICES'}
+------------------------------------------------------------------------------
+ROUTING DECISION: [CRITICAL EMERGENCY] -> EMERGENCY_SERVICES | engine=local:llama3.2 (fallback after cloud TimeoutException) | model latency 7.27s | total 11.28s
+==============================================================================
